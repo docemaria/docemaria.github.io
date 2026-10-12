@@ -122,7 +122,7 @@ function desenharFixos() {
     const proprias = [...cat.salgados, ...cat.doces, ...Object.values(cat.bolos)].filter((p) => p.fotoPropria).map((p) => p.nome.replace(/ de frango.*$/i, "").toLowerCase());
     const lista = proprias.length > 1 ? `${proprias.slice(0, -1).join(", ")} e ${proprias.at(-1)}` : proprias[0];
     const daCasa = proprias.length ? `Fotos da Doce Maria: ${esc(lista)}. As demais` : "Fotos";
-    $("[data-creditos]").innerHTML = `<p>${daCasa} são ilustrativas, de banco de imagens, até chegarem as fotos dos nossos produtos. ${creditos}.</p>`;
+    $("[data-creditos]").innerHTML = `<p>${daCasa} são ilustrativas, de banco de imagens e da internet, até chegarem as fotos dos nossos produtos. ${creditos}.</p>`;
   }
 }
 
