@@ -92,8 +92,9 @@ async function iniciar() {
 
 // ---------- Cardápio ----------
 
-function foto(src, alt, extra = "") {
-  const selo = cat.fotos.ilustrativas ? `<span class="selo-ilustrativa">Foto ilustrativa</span>` : "";
+/** `propria`: foto da Doce Maria (sem o selo "Foto ilustrativa"). */
+function foto(src, alt, extra = "", propria = false) {
+  const selo = cat.fotos.ilustrativas && !propria ? `<span class="selo-ilustrativa">Foto ilustrativa</span>` : "";
   return `<div class="cartao__foto"><img src="${esc(src)}" alt="${esc(alt)}" width="800" height="600" loading="lazy" decoding="async">${selo}${extra}</div>`;
 }
 
@@ -116,8 +117,12 @@ function desenharFixos() {
     .map((b) => `<tr><td>${esc(b.nome)}</td><td>${dinheiro(b.taxa)}</td></tr>`).join("");
   if (cat.fotos.ilustrativas) {
     const creditos = cat.fotos.creditos
+      .filter((c) => c.foto !== "Empadão" || cat.empadao?.ativo)
       .map((c) => `${esc(c.foto)}: <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.autor)}</a> (${esc(c.licenca)})`).join(" · ");
-    $("[data-creditos]").innerHTML = `<p>Fotos ilustrativas, de banco de imagens, até chegarem as fotos dos nossos produtos. ${creditos}.</p>`;
+    const proprias = [...cat.salgados, ...cat.doces, ...Object.values(cat.bolos)].filter((p) => p.fotoPropria).map((p) => p.nome.replace(/ de frango.*$/i, "").toLowerCase());
+    const lista = proprias.length > 1 ? `${proprias.slice(0, -1).join(", ")} e ${proprias.at(-1)}` : proprias[0];
+    const daCasa = proprias.length ? `Fotos da Doce Maria: ${esc(lista)}. As demais` : "Fotos";
+    $("[data-creditos]").innerHTML = `<p>${daCasa} são ilustrativas, de banco de imagens, até chegarem as fotos dos nossos produtos. ${creditos}.</p>`;
   }
 }
 
@@ -152,7 +157,7 @@ function desenharBolos() {
   const { decorado, caseiro, noiva } = cat.bolos;
   const cartao = (id, bolo, etiquetas, botao) => `
     <article class="cartao">
-      ${foto(bolo.foto, bolo.nome)}
+      ${foto(bolo.foto, bolo.nome, "", bolo.fotoPropria)}
       <div class="cartao__corpo">
         <h3>${esc(bolo.nome)}</h3>
         <p class="cartao__descricao">${esc(bolo.descricao)}</p>
@@ -187,7 +192,7 @@ function controleQtd(id, plural, editavel) {
 function desenharUnidades(categoria) {
   $(`[data-lista-${categoria}]`).innerHTML = cat[categoria].map((p) => `
     <article class="cartao cartao--produto">
-      ${foto(p.foto, p.nome)}
+      ${foto(p.foto, p.nome, "", p.fotoPropria)}
       <div class="cartao__corpo">
         <h3>${esc(p.nome)}</h3>
         <p class="cartao__preco">${dinheiro(p.preco)} <small>a unidade</small></p>

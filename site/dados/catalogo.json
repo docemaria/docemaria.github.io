@@ -60,6 +60,7 @@
       "passoKg": 0.5,
       "fatiasPorKg": [8, 8],
       "foto": "img/fotos/bolo-caseiro.webp",
+      "fotoPropria": true,
       "sabores": ["Macaxeira", "Fubá", "Massa puba"]
     },
     "noiva": {
@@ -74,8 +75,8 @@
     }
   },
   "salgados": [
-    { "id": "coxinha", "nome": "Coxinha de frango", "plural": "coxinhas", "preco": 2, "foto": "img/fotos/coxinha.webp" },
-    { "id": "empada", "nome": "Empada de frango", "plural": "empadas", "preco": 2, "foto": "img/fotos/empada.webp" },
+    { "id": "coxinha", "nome": "Coxinha de frango", "plural": "coxinhas", "preco": 2, "foto": "img/fotos/coxinha.webp", "fotoPropria": true },
+    { "id": "empada", "nome": "Empada de frango", "plural": "empadas", "preco": 2, "foto": "img/fotos/empada.webp", "fotoPropria": true },
     { "id": "bolinho-queijo", "nome": "Bolinho de queijo", "plural": "bolinhos de queijo", "preco": 2, "foto": "img/fotos/bolinho-queijo.webp" }
   ],
   "doces": [
@@ -182,7 +183,6 @@
     "ilustrativas": true,
     "semLicenca": [],
     "creditos": [
-      { "foto": "Coxinha", "autor": "Thomas Locke Hobbs", "licenca": "CC BY-SA 2.0", "url": "https://www.flickr.com/photos/22185138@N00/347193328" },
       { "foto": "Bem casado", "autor": "Jake Gonçalves", "licenca": "CC BY 2.0", "url": "https://www.flickr.com/photos/95039521@N04/9138435790" },
       { "foto": "Bolinho de queijo", "autor": "Tici Cardoso", "licenca": "CC BY 2.0", "url": "https://www.flickr.com/photos/39307489@N08/3995732873" },
       { "foto": "Empadão", "autor": "Smabs Sputzer", "licenca": "CC BY 2.0", "url": "https://www.flickr.com/photos/10413717@N08/4344880414" },
