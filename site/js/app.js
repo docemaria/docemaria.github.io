@@ -612,7 +612,7 @@ function desenharCarrinho() {
       <ul class="combinados--curto">
         <li>Sinal de ${Math.round(cat.regras.sinal * 100)}% no Pix para confirmar; o restante na entrega ou retirada (ou 100% de uma vez).</li>
         <li>Pedido confirmado não pode ser alterado.</li>
-        <li>Se desistir, o sinal não é devolvido.</li>
+        <li>Se desistir, o sinal (50%) não é devolvido; quem pagou 100% recebe 50% de volta.</li>
       </ul>
     </div>
     <div class="painel__rodape">
