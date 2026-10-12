@@ -4,7 +4,7 @@
 import {
   fatias, formatarHorario, formatarKg, formatarMoeda, montarHorario, nomeDoBairro, precoAdicionais,
   precoBolo, precoItem, produto, quantidades, totais, valoresPagamento,
-} from "./regras.js";
+} from "./regras.js?v=__VERSAO__";
 
 
 function linhasBoloDecorado(cat, bolo, kg) {

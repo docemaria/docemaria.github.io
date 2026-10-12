@@ -1,9 +1,14 @@
 // Tela do site: desenha o cardápio a partir do catálogo, monta bolos e kits,
 // controla o carrinho e abre o WhatsApp com o pedido. As regras ficam em regras.js.
 
-import * as r from "./regras.js";
-import { linhasDoItem, linkWhatsApp, montarMensagem } from "./mensagem.js";
-import { criarCarrinho } from "./carrinho.js";
+import * as r from "./regras.js?v=__VERSAO__";
+import { linhasDoItem, linkWhatsApp, montarMensagem } from "./mensagem.js?v=__VERSAO__";
+import { criarCarrinho } from "./carrinho.js?v=__VERSAO__";
+
+// Trocado pelo código do commit na publicação (GitHub Actions): endereço novo a cada versão,
+// para o celular não mostrar foto velha do cache (o GitHub Pages guarda arquivos por 10 min).
+const VERSAO = "__VERSAO__";
+const comVersao = (caminho) => `${caminho}?v=${VERSAO}`;
 
 const $ = (seletor, raiz = document) => raiz.querySelector(seletor);
 const $$ = (seletor, raiz = document) => [...raiz.querySelectorAll(seletor)];
@@ -68,7 +73,7 @@ async function aplicarFotosLocais() {
 
 async function iniciar() {
   try {
-    const resposta = await fetch("dados/catalogo.json", { cache: "no-cache" });
+    const resposta = await fetch(comVersao("dados/catalogo.json"), { cache: "no-cache" });
     if (!resposta.ok) throw new Error(String(resposta.status));
     cat = await resposta.json();
   } catch {
@@ -95,7 +100,7 @@ async function iniciar() {
 /** `propria`: foto da Doce Maria (sem o selo "Foto ilustrativa"). */
 function foto(src, alt, extra = "", propria = false) {
   const selo = cat.fotos.ilustrativas && !propria ? `<span class="selo-ilustrativa">Foto ilustrativa</span>` : "";
-  return `<div class="cartao__foto"><img src="${esc(src)}" alt="${esc(alt)}" width="800" height="600" loading="lazy" decoding="async">${selo}${extra}</div>`;
+  return `<div class="cartao__foto"><img src="${esc(comVersao(src))}" alt="${esc(alt)}" width="800" height="600" loading="lazy" decoding="async">${selo}${extra}</div>`;
 }
 
 function desenharFixos() {

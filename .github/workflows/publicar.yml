@@ -36,6 +36,12 @@ jobs:
       - name: Checagem do catálogo para publicar (preços, fotos, licenças)
         run: npm run validar:publicar
 
+      - name: Versão nos endereços (o celular não fica com arquivo velho no cache)
+        run: |
+          V="${GITHUB_SHA::7}"
+          sed -i "s/__VERSAO__/$V/g" site/index.html site/js/*.js
+          ! grep -rn "__VERSAO__" site/index.html site/js/
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
